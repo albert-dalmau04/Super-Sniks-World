@@ -11,13 +11,19 @@ public class PlayerController : MonoBehaviour
 
     private float Horizontal;
 
-    public int speed;
+    public float speed;
 
     public int JumpForce;
 
     private bool isGrounded;
 
     private Animator anim;
+
+    public GameObject bulletPrefab;
+
+    public GameObject instantiateBullet;
+
+    private float LastShoot;
 
     void Start()
     {
@@ -60,13 +66,10 @@ public class PlayerController : MonoBehaviour
 
         }
 
-        if (!isGrounded && rb2d.velocity.y > 0)
-        {
-            anim.SetBool("jumping", true);  
-        }
-        else
-        {
-            anim.SetBool("jumping", false);  
+        if (Input.GetKey("space") && Time.time > LastShoot + 0.20f){
+
+            Shoot();
+            LastShoot = Time.time;
         }
 
 
@@ -82,5 +85,25 @@ public class PlayerController : MonoBehaviour
     {
         rb2d.AddForce(Vector2.up * JumpForce);
 
+    }
+
+    private void Shoot()
+    {
+
+        Vector3 direction;
+
+        if(transform.localScale.x == 1.0f)
+        {
+            direction = Vector3.right;
+        }
+        else
+        {
+            direction = Vector3.left;
+        }
+
+        GameObject bullet = Instantiate(bulletPrefab, instantiateBullet.transform.position, Quaternion.identity);
+        bullet.GetComponent<BulletController>().SetDireccion(direction);
+
+        
     }
 }
