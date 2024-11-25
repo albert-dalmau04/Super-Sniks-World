@@ -9,7 +9,7 @@ public class BulletController : MonoBehaviour
 
     private Rigidbody2D rb2d;
 
-    public Vector3 Direction;
+    private Vector3 Direction;
 
     void Start()
     {
@@ -30,7 +30,6 @@ public class BulletController : MonoBehaviour
     public void DestroyBullet()
     {
         Destroy(gameObject);
-    }
-
+    }  
     
 }

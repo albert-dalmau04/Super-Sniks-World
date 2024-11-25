@@ -59,6 +59,8 @@ public class PlayerController : MonoBehaviour
             isGrounded = false;
         }
 
+        
+
         if ((Input.GetKeyDown("w") || (Input.GetKeyDown("up"))) && isGrounded)
         {
 
@@ -104,6 +106,5 @@ public class PlayerController : MonoBehaviour
         GameObject bullet = Instantiate(bulletPrefab, instantiateBullet.transform.position, Quaternion.identity);
         bullet.GetComponent<BulletController>().SetDireccion(direction);
 
-        
     }
 }
