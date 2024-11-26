@@ -30,6 +30,6 @@ public class BulletController : MonoBehaviour
     public void DestroyBullet()
     {
         Destroy(gameObject);
-    }  
-    
+    }
+
 }
