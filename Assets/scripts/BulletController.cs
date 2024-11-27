@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 public class BulletController : MonoBehaviour
@@ -10,6 +11,8 @@ public class BulletController : MonoBehaviour
     private Rigidbody2D rb2d;
 
     private Vector3 Direction;
+
+    public GameObject bulletDestroyPrefab;
 
     void Start()
     {
@@ -27,9 +30,20 @@ public class BulletController : MonoBehaviour
         Direction = direction;
     }
 
-    public void DestroyBullet()
+    private Vector3 destroyPosition;
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        Destroy(gameObject);
+        
+
+        if (collision.gameObject.CompareTag("mapa"))
+        {
+
+            destroyPosition = transform.position;
+            Destroy(gameObject);
+
+            Instantiate(bulletDestroyPrefab, destroyPosition, Quaternion.identity);
+        }
+
     }
 
 }
