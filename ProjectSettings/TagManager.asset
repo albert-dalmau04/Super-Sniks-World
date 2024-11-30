@@ -5,8 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - moneda
-  - mapa
+  - Undefined
   - bala
+  - enemy
   layers:
   - Default
   - TransparentFX

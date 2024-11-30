@@ -19,11 +19,16 @@ public class CameraControlller : MonoBehaviour
     void Update()
     {
 
-        if(player.transform.position.x > 0.35f && player.transform.position.x < 30.70f)
+        if(player != null)
         {
-            transform.position = new Vector3(player.transform.position.x, transform.position.y, offset.z);
+            if (player.transform.position.x > 0.35f && player.transform.position.x < 30.70f)
+            {
+                transform.position = new Vector3(player.transform.position.x, transform.position.y, offset.z);
 
+            }
         }
+
+        
         
         
     }

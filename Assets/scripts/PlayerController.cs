@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
+using UnityEngineInternal;
 
 public class PlayerController : MonoBehaviour
 {
@@ -25,13 +26,15 @@ public class PlayerController : MonoBehaviour
 
     private float LastShoot;
 
+    private int Health = 33;
+
     void Start()
     {
         rb2d = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
     }
 
-    // Update is called once per frame
+    // Update is called once per frame  
     void Update()
     {
         Horizontal = Input.GetAxisRaw("Horizontal");
@@ -53,13 +56,13 @@ public class PlayerController : MonoBehaviour
         if (Physics2D.Raycast(transform.position, Vector3.down, 0.1f))
         {
             isGrounded = true;
+
         }
         else
         {
             isGrounded = false;
-        }
 
-        
+        }
 
         if ((Input.GetKeyDown("w") || (Input.GetKeyDown("up"))) && isGrounded)
         {
@@ -75,6 +78,15 @@ public class PlayerController : MonoBehaviour
         }
 
 
+    }
+
+    public void Hit()
+    {
+        Health--;
+        if(Health == 0)
+        {
+            Destroy(gameObject);
+        }
     }
 
     private void FixedUpdate()

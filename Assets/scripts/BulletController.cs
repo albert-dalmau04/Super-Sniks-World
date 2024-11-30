@@ -22,7 +22,7 @@ public class BulletController : MonoBehaviour
     private void FixedUpdate()
     {
         rb2d.velocity = Direction * speed;
-        
+
     }
 
     public void SetDireccion(Vector3 direction)
@@ -31,19 +31,33 @@ public class BulletController : MonoBehaviour
     }
 
     private Vector3 destroyPosition;
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        
 
-        if (collision.gameObject.CompareTag("mapa"))
+        PlayerController player = collision.GetComponent<PlayerController>();
+
+        EnemyController enemy = collision.GetComponent<EnemyController>();
+
+        if(player != null)
         {
-
-            destroyPosition = transform.position;
-            Destroy(gameObject);
-
-            Instantiate(bulletDestroyPrefab, destroyPosition, Quaternion.identity);
+            player.Hit();
         }
 
+        if(enemy != null)
+        {
+            enemy.Hit();
+        }
+
+        DestroyBullet();
+    }
+
+
+    private void DestroyBullet()
+    {
+        destroyPosition = transform.position;
+        Destroy(gameObject);
+
+        Instantiate(bulletDestroyPrefab, destroyPosition, Quaternion.identity);
     }
 
 }
