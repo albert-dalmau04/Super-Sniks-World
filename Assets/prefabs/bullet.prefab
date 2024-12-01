@@ -99,6 +99,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38b8db1b5901a5b488a2d5be16c560a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sound: {fileID: 8300000, guid: ed3bdddf75612b64d9592638d2267cae, type: 3}
   speed: 3.5
   bulletDestroyPrefab: {fileID: 1029147188825871301, guid: d4bd15abda22d294ea581059a3c0ec73, type: 3}
 --- !u!58 &253722277908101055

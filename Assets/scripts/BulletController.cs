@@ -1,10 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class BulletController : MonoBehaviour
 {
+    public AudioClip sound;
 
     public float speed;
 
@@ -17,6 +19,7 @@ public class BulletController : MonoBehaviour
     void Start()
     {
         rb2d = GetComponent<Rigidbody2D>();
+        Camera.main.GetComponent<AudioSource>().PlayOneShot(sound, 0.8f); //amb aixo controlem el volum del audio que sonarà
     }
 
     private void FixedUpdate()
@@ -31,12 +34,15 @@ public class BulletController : MonoBehaviour
     }
 
     private Vector3 destroyPosition;
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
 
         PlayerController player = collision.GetComponent<PlayerController>();
 
         EnemyController enemy = collision.GetComponent<EnemyController>();
+
+        BulletController bullet = collision.GetComponent<BulletController>();
 
         if(player != null)
         {
@@ -48,9 +54,13 @@ public class BulletController : MonoBehaviour
             enemy.Hit();
         }
 
+        if(bullet != null)
+        {
+            return;     //amb aixo fem el 'break' de un for pero amb un if i surt de la funció
+        }
+
         DestroyBullet();
     }
-
 
     private void DestroyBullet()
     {
