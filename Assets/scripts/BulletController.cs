@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class BulletController : MonoBehaviour
 {
@@ -44,17 +45,17 @@ public class BulletController : MonoBehaviour
 
         BulletController bullet = collision.GetComponent<BulletController>();
 
-        if(player != null)
+        if (player != null)
         {
             player.Hit();
         }
 
-        if(enemy != null)
+        if (enemy != null)
         {
             enemy.Hit();
         }
 
-        if(bullet != null)
+        if (bullet != null)
         {
             return;     //amb aixo fem el 'break' de un for pero amb un if i surt de la funció
         }
@@ -69,5 +70,7 @@ public class BulletController : MonoBehaviour
 
         Instantiate(bulletDestroyPrefab, destroyPosition, Quaternion.identity);
     }
+
+
 
 }

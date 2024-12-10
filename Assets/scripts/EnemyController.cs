@@ -15,7 +15,7 @@ public class EnemyController : MonoBehaviour
 
     private float distance;
 
-    private int Health = 33;
+    private int Health = 3;
 
     void Update()
     {

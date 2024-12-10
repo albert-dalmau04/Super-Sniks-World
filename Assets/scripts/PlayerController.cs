@@ -1,8 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor.Experimental.GraphView;
+using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngineInternal;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -26,7 +24,7 @@ public class PlayerController : MonoBehaviour
 
     private float LastShoot;
 
-    private int Health = 33;
+    private int Health = 10;  //trets que aguanta el jugador
 
     void Start()
     {
@@ -37,6 +35,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame  
     void Update()
     {
+
         Horizontal = Input.GetAxisRaw("Horizontal");
 
         anim.SetBool("running", Horizontal != 0.0f);  //Amb això indiquem directament si el jugador s'està movent que faci l'animació
@@ -51,27 +50,16 @@ public class PlayerController : MonoBehaviour
             transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
         }
 
-        Debug.DrawRay(transform.position, Vector3.down * 0.1f, Color.red);
-
-        if (Physics2D.Raycast(transform.position, Vector3.down, 0.1f))
-        {
-            isGrounded = true;
-
-        }
-        else
-        {
-            isGrounded = false;
-
-        }
-
         if ((Input.GetKeyDown("w") || (Input.GetKeyDown("up"))) && isGrounded)
         {
 
             Jump();
+            
 
         }
 
-        if (Input.GetKey("space") && Time.time > LastShoot + 0.20f){
+        if (Input.GetKey("space") && Time.time > LastShoot + 0.20f)
+        {
 
             Shoot();
             LastShoot = Time.time;
@@ -80,12 +68,34 @@ public class PlayerController : MonoBehaviour
 
     }
 
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("terra") || collision.gameObject.CompareTag("enemy"))
+        {
+            isGrounded = true;
+        }
+        
+    }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("terra") || collision.gameObject.CompareTag("enemy"))
+        {
+            isGrounded = false;
+        }
+    }
+
     public void Hit()
     {
         Health--;
-        if(Health == 0)
+
+        if (Health == 0)
         {
-            Destroy(gameObject);
+
+            gameObject.SetActive(false);  //desactivem el personatje per fer l'efecte de que l'han matat
+
+            Invoke("GameOver", 0.5f);
+
         }
     }
 
@@ -106,7 +116,7 @@ public class PlayerController : MonoBehaviour
 
         Vector3 direction;
 
-        if(transform.localScale.x == 1.0f)
+        if (transform.localScale.x == 1.0f)
         {
             direction = Vector3.right;
         }
@@ -118,5 +128,23 @@ public class PlayerController : MonoBehaviour
         GameObject bullet = Instantiate(bulletPrefab, instantiateBullet.transform.position, Quaternion.identity);
         bullet.GetComponent<BulletController>().SetDireccion(direction);
 
+    }
+
+    private void GameOver()
+    {
+        SceneManager.LoadScene("GameOver");
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("background"))
+        {
+            Invoke("GameOver", 0.2f);
+        }
+
+        if (collision.gameObject.CompareTag("moneda"))
+        {
+            Debug.Log("You Win!");
+        }
     }
 }
