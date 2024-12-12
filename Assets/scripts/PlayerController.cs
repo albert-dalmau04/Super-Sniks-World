@@ -130,11 +130,6 @@ public class PlayerController : MonoBehaviour
 
     }
 
-    private void GameOver()
-    {
-        SceneManager.LoadScene("GameOver");
-    }
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("background"))
@@ -144,7 +139,17 @@ public class PlayerController : MonoBehaviour
 
         if (collision.gameObject.CompareTag("moneda"))
         {
-            Debug.Log("You Win!");
+            Invoke("YouWin", 0.2f);
         }
+    }
+
+    private void GameOver()
+    {
+        SceneManager.LoadScene("GameOver");
+    }
+
+    private void YouWin()
+    {
+        SceneManager.LoadScene("YouWin");
     }
 }
