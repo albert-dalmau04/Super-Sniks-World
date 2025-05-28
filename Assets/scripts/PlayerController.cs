@@ -24,12 +24,15 @@ public class PlayerController : MonoBehaviour
 
     private float LastShoot;
 
+
     private int Health = 10;  //trets que aguanta el jugador
 
     void Start()
     {
         rb2d = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
+
+   
     }
 
     // Update is called once per frame  
@@ -74,6 +77,8 @@ public class PlayerController : MonoBehaviour
         {
             isGrounded = true;
         }
+
+        
         
     }
 
@@ -83,6 +88,8 @@ public class PlayerController : MonoBehaviour
         {
             isGrounded = false;
         }
+
+        
     }
 
     public void Hit()
@@ -114,21 +121,21 @@ public class PlayerController : MonoBehaviour
     private void Shoot()
     {
 
-        Vector3 direction;
+            Vector3 direction;
 
-        if (transform.localScale.x == 1.0f)
-        {
-            direction = Vector3.right;
-        }
-        else
-        {
-            direction = Vector3.left;
-        }
+            if (transform.localScale.x == 1.0f)
+            {
+                direction = Vector3.right;
+            }
+            else
+            {
+                direction = Vector3.left;
+            }
 
-        GameObject bullet = Instantiate(bulletPrefab, instantiateBullet.transform.position, Quaternion.identity);
-        bullet.GetComponent<BulletController>().SetDireccion(direction);
+            GameObject bullet = Instantiate(bulletPrefab, instantiateBullet.transform.position, Quaternion.identity);
+            bullet.GetComponent<BulletController>().SetDireccion(direction);
 
-        Destroy(bullet, 5f);
+            Destroy(bullet, 5f);
 
     }
 

@@ -59,6 +59,8 @@ public class EnemyController : MonoBehaviour
 
         GameObject bullet = Instantiate(bulletPrefab, instantiateBullet.transform.position, Quaternion.identity);
         bullet.GetComponent<BulletController>().SetDireccion(direction);
+
+        Destroy(bullet, 5f);
     }
 
     public void Hit()

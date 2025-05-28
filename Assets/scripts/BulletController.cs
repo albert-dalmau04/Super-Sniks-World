@@ -45,6 +45,8 @@ public class BulletController : MonoBehaviour
 
         BulletController bullet = collision.GetComponent<BulletController>();
 
+
+
         
 
         if (player != null)
@@ -66,8 +68,6 @@ public class BulletController : MonoBehaviour
         {
             return;
         }
-
-
 
         DestroyBullet();
     }
