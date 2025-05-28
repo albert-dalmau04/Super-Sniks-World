@@ -9,6 +9,7 @@ TagManager:
   - enemy
   - background
   - terra
+  - paret
   layers:
   - Default
   - TransparentFX

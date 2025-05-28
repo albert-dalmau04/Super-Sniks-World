@@ -45,6 +45,8 @@ public class BulletController : MonoBehaviour
 
         BulletController bullet = collision.GetComponent<BulletController>();
 
+        
+
         if (player != null)
         {
             player.Hit();
@@ -59,6 +61,13 @@ public class BulletController : MonoBehaviour
         {
             return;     //amb aixo fem el 'break' de un for pero amb un if i surt de la funció
         }
+
+        if (collision.CompareTag("moneda") || collision.CompareTag("paret"))
+        {
+            return;
+        }
+
+
 
         DestroyBullet();
     }

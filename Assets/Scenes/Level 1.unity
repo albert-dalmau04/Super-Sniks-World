@@ -2066,7 +2066,7 @@ GameObject:
   - component: {fileID: 638723190}
   m_Layer: 0
   m_Name: bloqueFinal
-  m_TagString: Untagged
+  m_TagString: paret
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -34711,7 +34711,7 @@ GameObject:
   - component: {fileID: 1054169796}
   m_Layer: 0
   m_Name: bloqueInicio
-  m_TagString: Untagged
+  m_TagString: paret
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -39455,6 +39455,10 @@ PrefabInstance:
     - target: {fileID: 7642609405353077593, guid: 7373e384c06877e478670f1fb028f5b7, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8001970960828741216, guid: 7373e384c06877e478670f1fb028f5b7, type: 3}
+      propertyPath: JumpForce
+      value: 160
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

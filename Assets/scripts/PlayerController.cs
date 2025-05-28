@@ -128,6 +128,8 @@ public class PlayerController : MonoBehaviour
         GameObject bullet = Instantiate(bulletPrefab, instantiateBullet.transform.position, Quaternion.identity);
         bullet.GetComponent<BulletController>().SetDireccion(direction);
 
+        Destroy(bullet, 5f);
+
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -152,4 +154,5 @@ public class PlayerController : MonoBehaviour
     {
         SceneManager.LoadScene("YouWin");
     }
+
 }
